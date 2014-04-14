@@ -274,10 +274,13 @@
      (let ((x (ldb (byte 4 8) op))
            (y (ldb (byte 4 4) op))
            (n (ldb (byte 4 0) op)))
-       `(chip-8-display:draw display
-                             ,(make-register-symbol x)
-                             ,(make-register-symbol y)
-                             (read-bytes memory i ,n)))
+       `(setf ,(make-register-symbol #xf)
+              (if (chip-8-display:draw display
+                                       ,(make-register-symbol x)
+                                       ,(make-register-symbol y)
+                                       (read-bytes memory i ,n))
+                  1
+                  0)))
      )
 
     (#xE
