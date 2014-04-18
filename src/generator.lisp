@@ -345,7 +345,7 @@
         ;; LD F, Vx
         ;; Set I = location of sprite for digit Vx
         (let ((x (ldb (byte 4 8) op)))
-          `(setf i ,(get-digit-sprite-address x)))
+          `(setf i (get-digit-sprite-address ,(make-register-symbol x))))
         )
        (#x33
         ;; LD B, Vx
