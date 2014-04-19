@@ -204,16 +204,20 @@
         ;; Set Vx = Vx + Vy, set VF = carry
         (let ((x (ldb (byte 4 8) op))
               (y (ldb (byte 4 4) op)))
-          ;; TODO: Carry!
-          `(incf ,(make-register-symbol x) ,(make-register-symbol y)))
+          `(let ((sum (+ ,(make-register-symbol x) ,(make-register-symbol y))))
+             (setf vF (if (> sum 255) 1 0))
+             (setf ,(make-register-symbol x) (mod sum 256))))
         )
        (#x5
         ;; SUB Vx, Vy
         ;; Set Vx = Vx - Vy, set VF = NOT borrow
         (let ((x (ldb (byte 4 8) op))
               (y (ldb (byte 4 4) op)))
-          ;; TODO: Borrow!
-          `(decf ,(make-register-symbol x) ,(make-register-symbol y)))
+          `(let ((diff (- ,(make-register-symbol x) ,(make-register-symbol y))))
+             (setf vF (if (> 0 diff) 0 1))
+             (multiple-value-bind (q r) (floor diff 256)
+               (declare (ignore q))
+               (setf ,(make-register-symbol x) r))))
         )
        (#x6
         ;; SHR Vx {, Vy}
@@ -226,8 +230,11 @@
         ;; Set Vx = Vy - Vx, set VF = NOT borrow
         (let ((x (ldb (byte 4 8) op))
               (y (ldb (byte 4 4) op)))
-          `(setf ,(make-register-symbol x)
-                 (- ,(make-register-symbol y) ,(make-register-symbol x))))
+          `(let ((diff (- ,(make-register-symbol y) ,(make-register-symbol x))))
+             (setf vF (if (> 0 diff) 0 1))
+             (multiple-value-bind (q r) (floor diff 256)
+               (declare (ignore q))
+               (setf ,(make-register-symbol x) r))))
         )
        (#xE
         ;; SHL Vx {, Vy}
