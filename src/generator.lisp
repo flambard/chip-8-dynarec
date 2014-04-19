@@ -167,7 +167,7 @@
      )
 
     (#x8
-     (case (ldb (byte 4 0) op) ;; ecase
+     (ecase (ldb (byte 4 0) op)
        (#x0
         ;; LD Vx, Vy
         ;; Set Vx = Vy
@@ -289,7 +289,7 @@
      )
 
     (#xE
-     (case (ldb (byte 8 0) op) ;; ecase
+     (ecase (ldb (byte 8 0) op)
        (#x9E
         ;; SKP Vx
         ;; Skip next instruction if key with the value of Vx is pressed
@@ -307,7 +307,7 @@
         )))
 
     (#xF
-     (case (ldb (byte 8 0) op) ;; ecase
+     (ecase (ldb (byte 8 0) op)
        (#x07
         ;; LD Vx, DT
         ;; Set Vx = delay timer value
