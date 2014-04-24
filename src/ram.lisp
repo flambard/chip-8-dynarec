@@ -23,5 +23,5 @@
            :start1 position
            :end1 (+ position n)
            :start2 0
-           :end2 (1- n)))
+           :end2 n))
 
