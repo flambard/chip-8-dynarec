@@ -363,9 +363,7 @@
         ;; Store BCD representation of Vx in memory locations I, I+1, and I+2
         (let* ((x (ldb (byte 4 8) op))
                (x-sym (make-register-symbol x)))
-          `(multiple-value-bind (100s 10s-and-1s) (truncate ,x-sym 100)
-             (multiple-value-bind (10s 1s) (truncate 10s-and-1s 10)
-               (write-bytes memory i (vector 100s 10s 1s) 3))))
+          `(write-bytes memory i (bcd ,x-sym) 3))
         )
        (#x55
         ;; LD [I], Vx
@@ -400,3 +398,8 @@
      ,@(loop
           for address upfrom n to (+ n 255) by 2
           collect `(,address (go ,address)))))
+
+(defun bcd (n)
+  (multiple-value-bind (100s 10s-and-1s) (truncate n 100)
+    (multiple-value-bind (10s 1s) (truncate 10s-and-1s 10)
+      (vector 100s 10s 1s))))
