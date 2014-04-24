@@ -222,8 +222,11 @@
        (#x6
         ;; SHR Vx {, Vy}
         ;; Set Vx = Vx SHR 1
-        (let ((x (ldb (byte 4 8) op)))
-          `(setf ,(make-register-symbol x) (ash ,(make-register-symbol x) -1)))
+        (let* ((x (ldb (byte 4 8) op))
+               (x-sym (make-register-symbol x)))
+          `(progn
+             (setf vF (ldb (byte 1 0) ,x-sym))
+             (setf ,x-sym (ash ,x-sym -1))))
         )
        (#x7
         ;; SUBN Vx, Vy
@@ -239,8 +242,11 @@
        (#xE
         ;; SHL Vx {, Vy}
         ;; Set Vx = Vx SHL 1
-        (let ((x (ldb (byte 4 8) op)))
-          `(setf ,(make-register-symbol x) (ash ,(make-register-symbol x) 1)))
+        (let* ((x (ldb (byte 4 8) op))
+               (x-sym (make-register-symbol x)))
+          `(progn
+             (setf vF (ldb (byte 1 7) ,x-sym))
+             (setf ,x-sym (ash ,x-sym 1))))
         )))
 
     (#x9
