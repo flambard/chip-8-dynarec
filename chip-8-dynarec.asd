@@ -21,6 +21,8 @@
                     :depends-on ("packages"))
              (:file "digits"
                     :depends-on ("packages"))
+             (:file "opcode-translator"
+                    :depends-on ("packages"))
              (:file "ram"
                     :depends-on ("packages"))
              (:file "rom"
@@ -31,6 +33,7 @@
                                  "display-interface"
                                  "keyboard-interface"
                                  "digits"
+                                 "opcode-translator"
                                  "ram"
                                  "rom"))
              (:file "compiler"
