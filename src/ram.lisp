@@ -1,11 +1,11 @@
-(in-package :chip-8-dynarec)
+(in-package :chip-8-ram)
 
-(defconstant +ram-upper-limit+ #xFFF)
-(defconstant +ram-lower-limit+ #x200)
+(defconstant +upper-limit+ #xFFF)
+(defconstant +lower-limit+ #x200)
 
 
 (defun make-ram ()
-  (let ((ram (make-array (1+ +ram-upper-limit+)
+  (let ((ram (make-array (1+ +upper-limit+)
                          :element-type '(unsigned-byte 8)
                          :adjustable nil
                          :initial-element 0)))
@@ -13,7 +13,7 @@
     ram))
 
 (defun load-rom (ram code)
-  (write-bytes ram +ram-lower-limit+ code (length code)))
+  (write-bytes ram +lower-limit+ code (length code)))
 
 (defun read-bytes (ram position n)
   (subseq ram position (+ position n)))

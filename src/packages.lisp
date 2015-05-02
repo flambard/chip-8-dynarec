@@ -44,3 +44,20 @@
    ;; Programs will be exported when they are compiled.
 
    ))
+
+(defpackage #:chip-8-ram
+  (:documentation "CHIP-8 RAM interface.")
+  (:use #:cl)
+  (:export
+
+   #:+upper-limit+
+   #:+lower-limit+
+
+   #:make-ram
+   #:load-rom
+   #:read-bytes
+   #:write-bytes
+
+   #:get-digit-sprite-address
+
+   ))

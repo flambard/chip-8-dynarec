@@ -34,7 +34,8 @@
 
 
 (defun parse-rom (code)
-  (multiple-value-bind (main subs-addr) (parse-routine +ram-lower-limit+ code)
+  (multiple-value-bind (main subs-addr)
+      (parse-routine chip-8-ram:+lower-limit+ code)
     (values main (mapcar #'(lambda (addr)
                              (parse-routine addr code))
                          subs-addr))))

@@ -1,4 +1,4 @@
-(in-package :chip-8-dynarec)
+(in-package :chip-8-ram)
 
 (defun get-digit-sprite-address (digit)
   (aref +digit-sprite-positions+ digit))
