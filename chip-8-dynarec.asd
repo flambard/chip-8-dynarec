@@ -21,22 +21,23 @@
                     :depends-on ("packages"))
              (:file "digits"
                     :depends-on ("packages"))
-             (:file "opcode-translator"
-                    :depends-on ("packages"))
-             (:file "ram"
-                    :depends-on ("packages"))
              (:file "rom"
                     :depends-on ("packages"))
-             (:file "generator"
+             (:file "ram"
+                    :depends-on ("packages"
+                                 "digits"))
+             (:file "opcode-translator"
                     :depends-on ("packages"
                                  "buzzer-interface"
                                  "display-interface"
-                                 "keyboard-interface"
-                                 "digits"
+                                 "keyboard-interface"))
+             (:file "reader"
+                    :depends-on ("packages"
                                  "opcode-translator"
-                                 "ram"
-                                 "rom"))
+                                 "ram"))
              (:file "compiler"
                     :depends-on ("packages"
-                                 "generator"))
+                                 "reader"
+                                 "ram"
+                                 "rom"))
              ))))

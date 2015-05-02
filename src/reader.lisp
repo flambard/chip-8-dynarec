@@ -2,7 +2,7 @@
 
 (defun read-rom (code)
   (multiple-value-bind (main subs-addr)
-      (parse-routine chip-8-ram:+lower-limit+ code)
+      (read-routine chip-8-ram:+lower-limit+ code)
     (values main (mapcar #'(lambda (addr)
                              (cons (make-subroutine-symbol addr)
                                    (read-routine addr code)))
