@@ -197,7 +197,7 @@
   ;; Set delay timer = Vx
   `(progn
      (setf dt ,(make-register-symbol x))
-     (trivial-timers:schedule-timer zero-dt-timer (/ dt 60))))
+     (schedule-timer zero-dt-timer (/ dt 60))))
 
 (defmethod op-code ((n0 (eql #xF)) x (n2 (eql #x1)) (n3 (eql #x8)))
   ;; Fx18: LD ST, Vx

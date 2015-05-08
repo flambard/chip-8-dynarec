@@ -23,6 +23,8 @@
                     :depends-on ("packages"))
              (:file "rom"
                     :depends-on ("packages"))
+             (:file "timer"
+                    :depends-on ("packages"))
              (:file "ram"
                     :depends-on ("packages"
                                  "digits"))
@@ -30,7 +32,8 @@
                     :depends-on ("packages"
                                  "buzzer-interface"
                                  "display-interface"
-                                 "keyboard-interface"))
+                                 "keyboard-interface"
+                                 "timer"))
              (:file "reader"
                     :depends-on ("packages"
                                  "opcode-translator"
@@ -39,5 +42,6 @@
                     :depends-on ("packages"
                                  "reader"
                                  "ram"
-                                 "rom"))
+                                 "rom"
+                                 "timer"))
              ))))

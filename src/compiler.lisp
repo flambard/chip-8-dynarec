@@ -26,8 +26,7 @@
                       v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 vA vB vC vD vE vF)
                 (ignorable I DT
                            v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 vA vB vC vD vE vF))
-       (let ((zero-dt-timer (trivial-timers:make-timer
-                             #'(lambda () (setf DT 0)))))
+       (let ((zero-dt-timer (make-timer #'(lambda () (setf DT 0)))))
          (declare (ignorable zero-dt-timer))
          (chip-8-ram:load-rom memory ,code)
          (labels ,(loop for (subroutine-symbol . code) in subroutines collect
