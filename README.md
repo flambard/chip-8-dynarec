@@ -61,8 +61,3 @@ The buzzer makes a beeping sound.
 __chip-8-buzzer:beep__ buzzer seconds => _no value_
 
 > Make some noise for _seconds_.
-
-[Generic Function]  
-__chip-8-buzzer:silence__ buzzer => _no value_
-
-> Stop making noise.
